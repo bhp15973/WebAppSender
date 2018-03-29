@@ -14,5 +14,6 @@ namespace WebAppSender.Data
         {
         }
         public DbSet<QueueMessage> QueueMessages { get; set; }
+        public DbSet<TopicMessage> TopicMessages { get; set; }
     }
 }

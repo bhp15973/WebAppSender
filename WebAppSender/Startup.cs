@@ -28,7 +28,9 @@ namespace WebAppSender
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<AzureSettings>(Configuration.GetSection("Azure"));
+            services.Configure<AzureTopicSettings>(Configuration.GetSection("AzureTopic"));
             services.AddTransient<ISenderMessage, AzureQueueService>();
+            services.AddTransient<ISenderTopicMessage, AzureTopicService>();
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DatabaseContext")));
             services.AddMvc();
         }
