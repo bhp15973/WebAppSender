@@ -42,6 +42,6 @@ namespace WebAppSender.Controllers
             ModelState.Clear();
             return View(new QueueMessage());
         }
-    
+
     }
 }

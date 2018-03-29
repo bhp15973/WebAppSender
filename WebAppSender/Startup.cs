@@ -5,8 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebAppSender.Data;
 using WebAppSender.Interfaces;
 using WebAppSender.Services;
 using WebAppSender.Settings;
@@ -27,6 +29,7 @@ namespace WebAppSender
         {
             services.Configure<AzureSettings>(Configuration.GetSection("Azure"));
             services.AddTransient<ISenderMessage, AzureQueueService>();
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DatabaseContext")));
             services.AddMvc();
         }
 
