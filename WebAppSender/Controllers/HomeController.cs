@@ -12,8 +12,8 @@ namespace WebAppSender.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ISenderMessage _senderMessage;
-        public HomeController(ISenderMessage senderMessage)
+        private readonly ISenderTopicMessage _senderMessage;
+        public HomeController(ISenderTopicMessage senderMessage)
         {
             _senderMessage = senderMessage;
         }
@@ -24,23 +24,23 @@ namespace WebAppSender.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(QueueMessage queueMessage)
+        public async Task<ActionResult> Index(TopicMessage topicMessage)
         {
             ViewBag.ErrorMessage = null;
             try
             {
-                await _senderMessage.SendMessage(queueMessage);
+                await _senderMessage.SendMessage(topicMessage);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.ErrorMessage = ex.Message;
             }
-            if(ViewBag.ErrorMessage == null)
+            if (ViewBag.ErrorMessage == null)
             {
-                ViewBag.SuccessMessage = "object added to queue";
+                ViewBag.SuccessMessage = "object added to topic";
             }
             ModelState.Clear();
-            return View(new QueueMessage());
+            return View(new TopicMessage());
         }
 
     }

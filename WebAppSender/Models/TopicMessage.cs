@@ -10,7 +10,6 @@ namespace WebAppSender.Models
     {
         [JsonIgnore]
         public int ID { get; set; }
-        public string Subscription { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
     }
