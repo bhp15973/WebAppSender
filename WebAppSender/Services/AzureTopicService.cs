@@ -30,7 +30,11 @@ namespace WebAppSender.Services
         public async Task SendMessage(TopicMessage topicMessage)
         {
             var objToSend = JsonConvert.SerializeObject(topicMessage);
-            var message = new Message(Encoding.UTF8.GetBytes(objToSend));
+            var message = new Message(Encoding.UTF8.GetBytes(objToSend))
+            {
+                Label = topicMessage.Label
+            };
+
            
             // Send the message to the queue.
             await _topicClient.SendAsync(message);
